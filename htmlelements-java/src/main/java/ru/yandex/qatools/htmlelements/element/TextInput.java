@@ -41,8 +41,8 @@ public class TextInput extends TypifiedElement {
         if ("textarea".equals(getWrappedElement().getTagName())) {
             return getWrappedElement().getText();
         }
-        return null != getWrappedElement().getAttribute("value") 
-                ? getWrappedElement().getAttribute("value") : "";
+
+        return Optional.ofNullable(getWrappedElement().getAttribute("value")).orElse("");
     }
 
     /**

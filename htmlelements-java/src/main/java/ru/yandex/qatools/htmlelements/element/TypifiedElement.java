@@ -7,7 +7,7 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.Rectangle;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.internal.WrapsElement;
+import org.openqa.selenium.WrapsElement;
 
 import java.util.List;
 
@@ -29,9 +29,9 @@ import java.util.List;
  * <li>{@link Form}</li>
  * <li>{@link FileInput}</li>
  * </ul>
- * 
+ * <p/>
  * But you can also write your own typified elements if needed. For example:
- * 
+ * <p/>
  * <pre>
  * <code>public class Link extends TypifiedElement {
  * public Link(WebElement wrappedElement) {

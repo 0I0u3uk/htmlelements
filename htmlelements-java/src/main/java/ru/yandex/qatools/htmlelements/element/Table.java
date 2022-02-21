@@ -157,7 +157,11 @@ public class Table extends TypifiedElement {
      * row elements.
      */
     public List<Map<String, WebElement>> getRowsMappedToHeadings() {
-        return getRowsMappedToHeadings(getHeadingsAsString());
+        List<String> headingsAsString = getHeadingsAsString();
+        return getRows().stream()
+                .map(row -> row.stream()
+                        .collect(toMap(e -> headingsAsString.get(row.indexOf(e)), identity())))
+                .collect(toList());
     }
 
     /**
@@ -169,20 +173,10 @@ public class Table extends TypifiedElement {
      * row elements.
      */
     public List<Map<String, WebElement>> getRowsMappedToHeadings(List<String> headings) {
-        List<Map<String, WebElement>> rowsMappedToHeadings = new ArrayList<>();
-        List<String> headingElements = getHeadingsAsString();
-
-        for (List<WebElement> row : getRows()) {
-            Map<String, WebElement> rowToHeadingsMap = new HashMap<>();
-            for (String heading : headings) {
-                if (!headingElements.contains(heading)) {
-                    throw new HtmlElementsException("Header in the table can not be found: " + heading);
-                }
-                rowToHeadingsMap.put(heading, row.get(headingElements.indexOf(heading)));
-            }
-            rowsMappedToHeadings.add(rowToHeadingsMap);
-        }
-        return rowsMappedToHeadings;
+        return getRowsMappedToHeadings().stream()
+                .map(e -> e.entrySet().stream().filter(m -> headings.contains(m.getKey()))
+                        .collect(toMap(Map.Entry::getKey, Map.Entry::getValue)))
+                .collect(toList());
     }
 
     /**
@@ -193,7 +187,10 @@ public class Table extends TypifiedElement {
      * row text of elements.
      */
     public List<Map<String, String>> getRowsAsStringMappedToHeadings() {
-        return getRowsAsStringMappedToHeadings(getHeadingsAsString());
+        return getRowsMappedToHeadings().stream()
+                .map(m -> m.entrySet().stream()
+                        .collect(toMap(Map.Entry::getKey, e -> e.getValue().getText())))
+                .collect(toList());
 
     }
 

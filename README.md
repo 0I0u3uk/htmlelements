@@ -29,6 +29,9 @@ In case you are not a Java guy/gal, don't panic, there are still few options:
 
 Release Notes
 -------------
+* [Version 1.20 Release Notes](https://github.com/yandex-qatools/htmlelements/releases/tag/htmlelements-1.20.0)
+* [Version 1.19 Release Notes](https://github.com/yandex-qatools/htmlelements/releases/tag/htmlelements-1.19)
+* [Version 1.18 Release Notes](https://github.com/yandex-qatools/htmlelements/releases/tag/htmlelements-1.18)
 * [Version 1.17 Release Notes](https://github.com/yandex-qatools/htmlelements/releases/tag/htmlelements-1.17)
 * [Version 1.16 Release Notes](https://github.com/yandex-qatools/htmlelements/releases/tag/htmlelements-1.16)
 * [Version 1.15 Release Notes](https://github.com/yandex-qatools/htmlelements/releases/tag/htmlelements-1.15)
@@ -47,7 +50,7 @@ Maven dependencies for Html Elements core:
 <dependency>
     <groupId>ru.yandex.qatools.htmlelements</groupId>
     <artifactId>htmlelements-java</artifactId>
-    <version>1.17</version>
+    <version>1.21.0</version> <!-- 1.21+ is SELENIUM 4.1.0 compatible -->
 </dependency>
 ```
 
@@ -57,7 +60,7 @@ And for Thucydides integration:
 <dependency>
     <groupId>ru.yandex.qatools.htmlelements</groupId>
     <artifactId>htmlelements-thucydides</artifactId>
-    <version>1.17</version>
+    <version>1.21.0</version>
 </dependency>
 ```
 
@@ -67,7 +70,7 @@ Or you can include all modules at once if needed:
 <dependency>
     <groupId>ru.yandex.qatools.htmlelements</groupId>
     <artifactId>htmlelements-all</artifactId>
-    <version>1.17</version>
+    <version>1.21.0</version>
 </dependency>
 ```
 

@@ -81,13 +81,13 @@ public class Radio extends TypifiedElement {
      * @param value The value to match against.
      */
     public void selectByValue(String value) {
-        for (WebElement button : getButtons()) {
-            if (value.equals(button.getAttribute("value"))) {
-                selectButton(button);
-                return;
-            }
-        }
-        throw new NoSuchElementException(String.format("Cannot locate radio button with value: %s", value));
+        WebElement matchingButton = getButtons().stream()
+                .filter(b -> value.equals(b.getAttribute("value")))
+                .findFirst()
+                .orElseThrow(() -> new NoSuchElementException(
+                        String.format("Cannot locate radio button with value: %s", value)));
+
+        selectButton(matchingButton);
     }
 
     /**

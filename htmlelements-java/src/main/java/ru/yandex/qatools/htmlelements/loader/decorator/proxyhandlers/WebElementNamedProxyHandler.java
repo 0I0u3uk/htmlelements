@@ -7,6 +7,7 @@ import org.openqa.selenium.support.ui.Clock;
 import org.openqa.selenium.support.ui.SystemClock;
 
 import java.lang.reflect.Method;
+import java.time.Clock;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -26,7 +27,7 @@ public class WebElementNamedProxyHandler extends LocatingElementHandler {
     public WebElementNamedProxyHandler(ElementLocator locator, String name) {
         super(locator);
         this.name = name;
-        this.clock = new SystemClock();
+        this.clock = Clock.systemDefaultZone();
         this.timeOutInSeconds = Integer.getInteger("webdriver.timeouts.implicitlywait", DEFAULT_TIMEOUT);
     }
 
@@ -36,18 +37,18 @@ public class WebElementNamedProxyHandler extends LocatingElementHandler {
             return name;
         }
 
-        long end = this.clock.laterBy(TimeUnit.SECONDS.toMillis(this.timeOutInSeconds));
+        final long end = this.clock.millis() + TimeUnit.SECONDS.toMillis(this.timeOutInSeconds);
 
-        StaleElementReferenceException lasException = null;
-        while (this.clock.isNowBefore(end)) {
+        StaleElementReferenceException lastException;
+        do {
             try {
                 return super.invoke(o, method, objects);
             } catch (StaleElementReferenceException e) {
-                lasException = e;
+                lastException = e;
                 this.waitFor();
             }
-        }
-        throw lasException;
+        } while (this.clock.millis() < end);
+        throw lastException;
     }
 
     protected long sleepFor() {
