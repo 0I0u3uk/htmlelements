@@ -4,6 +4,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 
+import java.util.Optional;
+
 /**
  * Represents text input control (such as &lt;input type="text"/&gt; or &lt;textarea/&gt;).
  *
@@ -23,7 +25,7 @@ public class TextInput extends TypifiedElement {
     /**
      * @return Text entered into the text input.
      * @deprecated Use getText() instead.
-     * 
+     * <p/>
      * Retrieves the text entered into this text input.
      */
     @Deprecated

@@ -3,8 +3,7 @@ package ru.yandex.qatools.htmlelements.loader.decorator.proxyhandlers;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
 import org.openqa.selenium.support.pagefactory.internal.LocatingElementHandler;
-import org.openqa.selenium.support.ui.Clock;
-import org.openqa.selenium.support.ui.SystemClock;
+
 
 import java.lang.reflect.Method;
 import java.time.Clock;
